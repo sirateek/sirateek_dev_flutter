@@ -17,6 +17,7 @@ environment:
   sdk: ">=2.1.0 <3.0.0"
 
 dependencies:
+  url_launcher: ^5.4.2
   logger: ^0.8.3
   font_awesome_flutter: ^8.7.0
   animated_text_kit: ^2.0.0
@@ -57,6 +58,7 @@ flutter:
     - family: Arial
       fonts:
         - asset: assets/fonts/Arial.ttf
+        - asset: assets/fonts/Arial2.ttf
           weight: 700
   #   - family: Trajan Pro
   #     fonts:

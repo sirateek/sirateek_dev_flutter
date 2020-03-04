@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:sirateek_dev/services/screenClass.dart';
+import '../services/screenService.dart';
+import '../services/appbarService.dart';
 
 class SirateeKDev extends StatefulWidget {
   @override
@@ -7,10 +10,15 @@ class SirateeKDev extends StatefulWidget {
 
 class SirateeKDevState extends State<SirateeKDev> {
   bool isBigScreen = false;
+  bool initCheck = true;
+  String pageName;
+  Widget body;
+  Widget appBar;
   @override
   void initState() {
     super.initState();
-    //logger.i("Welcome to sirateek.dev");
+    pageName = "Home";
+    appBar = appbarService();
   }
 
   @override
@@ -20,19 +28,33 @@ class SirateeKDevState extends State<SirateeKDev> {
   }
 
   void screenCheck(BuildContext context) {
-    if (screenWidthSizeGet(context) <= 800) {
+    if (screenWidthSizeGet(context) <= 1030) {
+      if (initCheck) {
+        isBigScreen = false;
+        screenSetState(ScreenData(false, pageName));
+        initCheck = false;
+      }
       if (isBigScreen) {
         isBigScreen = false;
-        print("Small");
+        screenSetState(ScreenData(false, pageName));
       }
-      return;
     } else {
+      if (initCheck) {
+        isBigScreen = true;
+        screenSetState(ScreenData(true, pageName));
+        initCheck = false;
+      }
       if (!isBigScreen) {
         isBigScreen = true;
-        print("Big");
+        screenSetState(ScreenData(true, pageName));
       }
-      return;
     }
+  }
+
+  void screenSetState(ScreenData screenData) {
+    setState(() {
+      body = screenServices(screenData);
+    });
   }
 
   double screenWidthSizeGet(BuildContext context) {
@@ -42,40 +64,8 @@ class SirateeKDevState extends State<SirateeKDev> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Row(
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(5),
-            ),
-            Text(
-              "sirateek.dev",
-              style: TextStyle(fontSize: 30, fontFamily: "Arial"),
-            ),
-          ],
-        ),
-        backgroundColor: Color.fromRGBO(242, 174, 0, 1),
-      ),
-      body: SingleChildScrollView(
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.all(100),
-              ),
-              Text(
-                "Welcome to sirateek.dev",
-                style: TextStyle(fontSize: 40, fontFamily: "Arial"),
-              ),
-              Text(
-                "But I am still in development. Please come back later...",
-                style: TextStyle(fontSize: 40, fontFamily: "Arial"),
-              ),
-            ],
-          ),
-        ),
-      ),
+      appBar: appBar,
+      body: body,
     );
   }
 }
