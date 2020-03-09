@@ -11,7 +11,10 @@ AppBar appbarService() {
         ),
         Text(
           "sirateek.dev",
-          style: TextStyle(fontSize: 30, fontFamily: "Arial"),
+          style: TextStyle(
+            fontSize: 30,
+            fontFamily: "Arial",
+          ),
         ),
       ],
     ),

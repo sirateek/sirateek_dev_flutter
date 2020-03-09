@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:sirateek_dev/services/screenClass.dart';
-import '../services/screenService.dart';
-import '../services/appbarService.dart';
+import 'package:sirateek_dev/services/appbarService.dart';
+import 'package:sirateek_dev/services/screen_data.dart';
+import 'package:sirateek_dev/services/screen_service.dart';
 
 class SirateeKDev extends StatefulWidget {
   @override
